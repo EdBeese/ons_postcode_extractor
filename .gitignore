@@ -1,0 +1,11 @@
+/.bundle
+/.idea
+/.vscode
+*.swp
+*.swo
+*.log
+*.tmp
+*.csv
+*.DS_Store
+*.bak
+
