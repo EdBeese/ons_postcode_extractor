@@ -81,7 +81,7 @@ The app will remove any terminated postcodes from the output CSV.
 #### Non-Geographic Postcodes
 A number of postcodes exist as non-geographic locations.  Often, these are things like PO Boxes or postcodes for specific governmental institutions.
 
-Non-geographic postcodes can be identified by their coordinates, which will have a latitude of either 100 or 99.9999.
+Non-geographic postcodes can be identified within the ONSPD by their coordinates, which will have a latitude of either 100 or 99.9999.
 
 The app removes all non-geographic postcodes from the output CSV.
 
@@ -97,7 +97,7 @@ The `message` will be the details of the `MissingColumnsError` that has been rai
 
 If this occurs, the column header can be altered within the downloaded file to patch in the immediate.
 
-However, if it is confirmed that ONS has changed the data stucture, or header names, an issue should be raised, or a pull request made with the alteration.
+However, if it is confirmed that ONS has changed the data structure, or header names, an issue should be raised, or a pull request made with the alteration.
 #### Bad Command or Missing / Invalid File
 The app will exit gracefully, if an invalid command is passed in.
 
@@ -105,7 +105,7 @@ Currently, the only valid command is `process`.
 
 Likewise, if no file path is provided, or the path does not link to a valid file, the app will also exit.
 
-### Unknown LAD25CD
+### Unknown LAD25CD (Local Authority ID)
 This is the unique ONS code for a Local Authority.  Local Authorities are sometimes changed, divided, or created, and the app may not have all of the latest codes.
 
 If an unknown LAD25CD is included in the input file, the following warning will appear:
@@ -118,7 +118,7 @@ If a new code has been created, an issue should be reported, or the new authorit
 ### Invalid Postcode Warning
 The app uses the [`uk_postcode`](https://github.com/threedaymonk/uk_postcode) gem to parse and validate the postcodes within the ONSPD.
 
-Should a postcode appear to be invalid or incomplete, a warning will appear, for example, if the input postcode is `'BATMAN'`, the following warning will appear:
+Should a postcode appear to be invalid or incomplete, a warning will appear.  For example, if the input postcode is `'BATMAN'`, the following warning will appear:
 ```
 "⛔️ Postcode Failed Validation: BATMAN. Check data."
 ```
@@ -130,11 +130,11 @@ The app applies a town value, based on Regex matchers for each postcode outcode.
 New postcode outcodes are sometimes created by Royal Mail, and, if that is the case, then the matches may not find a town that matches the pattern.  If that is the case, then a warning will appear.  For example, if a new postcode area E23 is created, the following will appear:
 
 ```
-"⚠️ Outcode E22 not found. Regex data may need to be updated."
+"⚠️ Outcode E23 not found. Regex data may need to be updated."
 ```
 If this occurs, then an issue should be raised, or a pull request made with the amended Regex matcher.
 
-### Maltiple Town Matches
+### Multiple Town Matches
 Some postcode outcodes cover more than one Post Town (for example, the BR2 postcode covers both Bromley and Keston).  In the unlikely event that a new postcode matches more than one Regex pattern, the following warning will appear.  For example, if BR2 6AA matched more than one pattern, the following will appear.
 ```
 "⚠️ Multiple possible matches for BR2 6AA. Regex data may need to be updated."
